@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
+import { css } from 'linaria'
+import { utils } from '../styles'
 import Link from 'next/link'
 
 const name = '[Your Name]'
@@ -8,7 +8,7 @@ export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.globals} ${styles.container}`}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -29,10 +29,10 @@ export default function Layout({ children, home }) {
           <>
             <img
               src="/images/profile.jpg"
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
+              className={`${styles.headerHomeImage} ${utils.borderCircle}`}
               alt={name}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h1 className={utils.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
@@ -40,14 +40,14 @@ export default function Layout({ children, home }) {
               <a>
                 <img
                   src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+                  className={`${styles.headerImage} ${utils.borderCircle}`}
                   alt={name}
                 />
               </a>
             </Link>
-            <h2 className={utilStyles.headingLg}>
+            <h2 className={utils.headingLg}>
               <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+                <a className={utils.colorInherit}>{name}</a>
               </Link>
             </h2>
           </>
@@ -63,4 +63,28 @@ export default function Layout({ children, home }) {
       )}
     </div>
   )
+}
+
+const styles = {
+  container: css`
+    max-width: 36rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+  `,
+  header: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+  headerImage: css`
+    width: 6rem;
+    height: 6rem;
+  `,
+  headerHomeImage: css`
+    width: 8rem;
+    height: 8rem;
+  `,
+  backToHome: css`
+    margin: 3rem 0 0;
+  `
 }
